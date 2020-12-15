@@ -11,30 +11,36 @@ public class Patrol : MonoBehaviour
     
 
     public Transform[] moveSpots;
-    private int randomSpot;
+    private int spot;
 
     // Start is called before the first frame update
     void Start()
     {
-        randomSpot = Random.Range(0, moveSpots.Length);        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, moveSpots[randomSpot].position, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, moveSpots[spot].position, speed * Time.deltaTime);
 
-        if (Vector2.Distance(transform.position, moveSpots[randomSpot].position) < 0.2f)
+        if (Vector2.Distance(transform.position, moveSpots[spot].position) < 0.2f)
         {
             if (waitTime <= 0)
             {
-                randomSpot = Random.Range(0, moveSpots.Length);
+                spot++;
                 waitTime = startWaitTime;
-            }else
-            {
-                waitTime -= Time.deltaTime;
+
+                if (spot >= moveSpots.Length)
+                {
+                    spot = 0;
+                }
+
+            }
+            else
+            { 
+                    waitTime -= Time.deltaTime;
             }
         }
-
     }
-}
+}       
