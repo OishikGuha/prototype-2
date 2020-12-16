@@ -5,11 +5,10 @@ using UnityEngine;
 public class WinManager : MonoBehaviour
 {
 
-    public GameObject Win;
+    public GameManager gm;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        Win.SetActive(true);
-        Debug.Log(collision.name);
+        gm.Win();
     }
 }
